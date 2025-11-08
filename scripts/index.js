@@ -15,7 +15,7 @@ if (products.length === 0) {
     {
       id: 'p1',
       title: 'Women’s Blouse',
-      category: 'Women',
+      category: 'Clothing',
       price: 85,
       img: 'images/blouse.jpg',
       desc: 'Lightweight cotton blouse, perfect for everyday style.' 
@@ -23,7 +23,7 @@ if (products.length === 0) {
     {
       id: 'p2',
       title: 'Men’s Sneakers',
-      category: 'Men',
+      category: 'Shoes',
       price: 240,
       img: 'images/sneakers.jpg',
       desc: 'Easy-going, stylish sneakers perfect for daily wear with ultimate comfort.' 
@@ -31,7 +31,7 @@ if (products.length === 0) {
     {
       id: 'p3',
       title: 'Kids Hoodie',
-      category: 'Kids',
+      category: 'Clothing',
       price: 130,
       img: 'images/hoodie.jpg',
       desc: 'Kids’ hoodie, soft, warm and cozy, great for all seasons.'
@@ -71,11 +71,23 @@ function renderProducts(list = products) {
 
 // --- FILTER / SEARCH ---
 function filterAndRender(category = null, query = '') {
-  let filtered = [...products];
-  if (category && category !== 'All') filtered = filtered.filter(p => p.category === category);
-  if (query) filtered = filtered.filter(p => p.title.toLowerCase().includes(query.toLowerCase()));
-  renderProducts(filtered);
-}
+    let filtered = [...products];
+    if (category && category !== 'All') {
+      filtered = filtered.filter(p => p.category === category);
+    }
+    if (query) {
+      filtered = filtered.filter(p => 
+        p.title.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+    renderProducts(filtered);
+  }
+
+  // --- ACTIVE BUTTON HIGHLIGHT ---
+  function setActiveFilter(button) {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+  }
 
 // --- CART FUNCTIONS ---
 function addToCart(id) {
