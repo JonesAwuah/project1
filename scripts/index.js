@@ -18,7 +18,7 @@ if (products.length === 0) {
       category: 'Women',
       price: 85,
       img: 'images/blouse.jpg',
-      desc: 'Lightweight cotton blouse, perfect for for everyday style.' 
+      desc: 'Lightweight cotton blouse, perfect for everyday style.' 
     },
     {
       id: 'p2',
@@ -137,7 +137,7 @@ function viewProduct(id) {
   modals.innerHTML = `
   <div class="modal-backdrop" onclick="closeModal(event)">
     <div class="modal" onclick="event.stopPropagation()">
-      <div class="media"><img src="${p.img}" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="media"><img src="${p.img}" style="width:100%;height:80%;object-fit:cover"></div>
       <div class="content">
         <h3>${escapeHtml(p.title)}</h3>
         <p>${escapeHtml(p.desc)}</p>
