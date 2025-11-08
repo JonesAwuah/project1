@@ -17,7 +17,7 @@ if (products.length === 0) {
       title: 'Women’s Blouse',
       category: 'Women',
       price: 85,
-      img: 'images/blouse.jpeg',
+      img: 'images/blouse.jpg',
       desc: 'Soft cotton premium T-shirt, perfect for daily wear.'
     },
     {
@@ -25,7 +25,7 @@ if (products.length === 0) {
       title: 'Men’s Sneakers',
       category: 'Men',
       price: 240,
-      img: 'images/sneakers.jpeg',
+      img: 'images/sneakers.jpg',
       desc: 'Comfortable sneakers for everyday wear.'
     },
     {
@@ -33,7 +33,7 @@ if (products.length === 0) {
       title: 'Kids Hoodie',
       category: 'Kids',
       price: 130,
-      img: 'images/hoodie.jpeg',
+      img: 'images/hoodie.jpg',
       desc: 'Cozy hoodie for kids, great for all seasons.'
     }
   ];
