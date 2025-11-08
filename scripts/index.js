@@ -14,10 +14,10 @@ if (products.length === 0) {
   products = [
     {
       id: 'p1',
-      title: 'Classic White T-Shirt',
+      title: 'Women’s Blouse',
       category: 'Women',
       price: 85,
-      img: 'images/tshirt.jpeg',
+      img: 'images/blouse.jpeg',
       desc: 'Soft cotton premium T-shirt, perfect for daily wear.'
     },
     {
@@ -25,7 +25,7 @@ if (products.length === 0) {
       title: 'Men’s Sneakers',
       category: 'Men',
       price: 240,
-      img: 'https://images.unsplash.com/photo-1589187155478-1445c4f06d8f?q=80&w=800',
+      img: 'images/sneakers.jpeg',
       desc: 'Comfortable sneakers for everyday wear.'
     },
     {
@@ -33,7 +33,7 @@ if (products.length === 0) {
       title: 'Kids Hoodie',
       category: 'Kids',
       price: 130,
-      img: 'https://images.unsplash.com/photo-1606813909180-79c3e962654f?q=80&w=800',
+      img: 'images/hoodie.jpeg',
       desc: 'Cozy hoodie for kids, great for all seasons.'
     }
   ];
