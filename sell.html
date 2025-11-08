@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AJ Fashion Galaxy — Sell</title>
+  <link rel="stylesheet" href="styles/index.css" />
+</head>
+<body>
+  <!-- same header -->
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">AJ</div>
+        <div>
+          <div style="font-size:14px">AJ Fashion Galaxy</div>
+          <div style="font-size:11px;color:var(--muted)">Buy • Sell • Discover</div>
+        </div>
+      </div>
+
+      <div class="search">
+        <input id="topSearch" placeholder="Search clothes, shoes, accessories..." />
+      </div>
+
+      <div class="actions">
+        <button class="btn alt" id="womenBtn">Women</button>
+        <button class="btn alt" id="menBtn">Men</button>
+        <button class="btn alt" id="kidsBtn">Kids</button>
+        <button class="btn alt" id="sellBtn">Sell</button>
+        <button class="btn alt" id="loginBtn">Login</button>
+        <button class="btn" id="openCart">Cart (<span id="cartNum">0</span>)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section style="max-width:900px;margin:36px auto;padding:0 20px">
+      <h2>Sell — Add a new product</h2>
+
+      <div id="authArea"></div>
+
+      <div id="sellForm" class="panel" style="display:none;margin-top:12px">
+        <label>Title</label><input id="p_title" />
+        <label>Category</label>
+        <select id="p_category"><option>Women</option><option>Men</option><option>Kids</option></select>
+        <label>Price (GHS)</label><input id="p_price" type="number" step="0.01" />
+        <label>Image URL</label><input id="p_img" placeholder="https://..." />
+        <label>Description</label><textarea id="p_desc" rows="4"></textarea>
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <button id="saveProduct" class="btn">Save Product</button>
+          <button id="cancelProduct" class="btn alt">Cancel</button>
+        </div>
+      </div>
+
+      <h3 style="margin-top:24px">Your listings (local)</h3>
+      <div id="yourListings" class="grid"></div>
+    </section>
+  </main>
+
+  <div id="modals"></div>
+  <script src="scripts/index.js"></script>
+</body>
+</html>

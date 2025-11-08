@@ -1,0 +1,386 @@
+ :root{
+--bg:#f7f7fb;
+--card:#ffffff;
+--muted:#6b7280;
+--accent:#1f2937; /* dark slate */
+--accent-2:#ff6b6b; /* optional brand pop */
+--radius:12px;
+--glass: rgba(255,255,255,0.6);
+--shadow: 0 6px 18px rgba(15,23,42,0.08);
+--max-width:1200px;
+--container-padding:20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: #111;
+}
+
+a {
+  color: inherit;
+}
+
+/* ========== HEADER & NAVIGATION ========== */
+header {
+  background: linear-gradient(90deg, #ffffffcc, #ffffffcc);
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px var(--container-padding);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+}
+
+.brand .logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-2), #ffb86b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+}
+
+.nav .search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e6e9ef;
+  background: white;
+}
+
+.nav .actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn {
+  background: var(--accent);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.alt {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid #e6e9ef;
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+  max-width: var(--max-width);
+  margin: 22px auto;
+  padding: 0 var(--container-padding);
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.hero-left {
+  flex: 1;
+}
+
+.hero-right {
+  width: 320px;
+}
+
+.hero h1 {
+  font-size: 28px;
+  margin: 0 0 8px;
+}
+
+.hero p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* ========== MAIN LAYOUT ========== */
+.main {
+  max-width: var(--max-width);
+  margin: 18px auto;
+  padding: 0 var(--container-padding);
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 20px;
+}
+
+/* ========== FILTER PANEL ========== */
+.panel {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.filters h4 {
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chip {
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid #eef2f6;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.chip.active {
+  background: var(--accent);
+  color: white;
+  border: none;
+}
+ 
+ 
+ 
+ .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ========== CARD STYLES ========== */
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.card .media {
+  height: 240px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card .body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.price {
+  font-weight: 700;
+}
+
+.desc {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.card .actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.small {
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #eef2f6;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* ========== CART DRAWER ========== */
+.cart-drawer {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 380px;
+  background: var(--card);
+  box-shadow: -14px 0 40px rgba(15, 23, 42, 0.15);
+  transform: translateX(110%);
+  transition: transform 0.28s;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-drawer.open {
+  transform: translateX(0);
+}
+
+.cart-head {
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-items {
+  padding: 12px;
+  overflow: auto;
+  flex: 1;
+}
+
+.cart-line {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed #f0f0f3;
+}
+
+.cart-footer {
+  padding: 16px;
+  border-top: 1px solid #f0f0f3;
+}
+
+/* ========== MODAL ========== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 8, 15, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+
+.modal {
+  width: 960px;
+  max-width: 96%;
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+}
+
+.modal .media {
+  height: 420px;
+}
+
+.modal .content {
+  padding: 18px;
+}
+
+/* ========== FORMS ========== */
+label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e6e9ef;
+  margin-bottom: 10px;
+}
+
+/* ========== UTILITIES ========== */
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========== RESPONSIVE BREAKPOINTS ========== */
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .main {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-right {
+    display: none;
+  }
+
+  .modal {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .nav .search {
+    display: none;
+  }
+}
+
+/* ========== SMALL TOUCHES ========== */
+.badge {
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #111;
+}

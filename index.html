@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AJ Fashion Galaxy</title>
+  <meta name="description" content="AJ Fashion Galaxy - Buy & sell clothing, shoes and accessories" />
+  <link rel="stylesheet" href="styles/index.css" />
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="logo">AJ</div>
+      <div>
+        <div style="font-size:14px">AJ Fashion Galaxy</div>
+        <div style="font-size:11px;color:var(--muted)">Buy • Sell • Discover</div>
+      </div>
+    </div>
+
+    <div class="search">
+      <input id="topSearch" placeholder="Search clothes, shoes, accessories..." />
+    </div>
+
+    <div class="actions">
+  <a href="women.html" class="btn alt">Women</a>
+  <a href="men.html" class="btn alt">Men</a>
+  <a href="kids.html" class="btn alt">Kids</a>
+  <a href="sell.html" class="btn alt">Sell</a>
+  <button class="btn alt" id="loginBtn">Login</button>
+  <button class="btn" id="openCart">Cart (<span id="cartNum">0</span>)</button>
+</div>
+</header>
+
+<section class="hero">
+  <div class="hero-left">
+    <h1>Welcome to AJ Fashion Galaxy</h1>
+    <p>Curated pre-loved & new fashion — clothes, shoes and accessories. Inspired by the clean marketplace layout you like.</p>
+  </div>
+
+  <div class="hero-right panel">
+    <div style="font-weight:700">Quick Filters</div>
+    <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="chip" data-cat="Clothing">Clothing</button>
+      <button class="chip" data-cat="Shoes">Shoes</button>
+      <button class="chip" data-cat="Accessories">Accessories</button>
+      <button class="chip" data-cat="All">All</button>
+    </div>
+  </div>
+</section>
+
+<main class="main">
+  <!-- Left sidebar -->
+  <aside class="panel">
+    <div class="filters">
+      <h4>Filters</h4>
+
+      <div style="margin-bottom:8px">
+        <label>Category</label>
+        <select id="filterCategory">
+          <option>All</option>
+          <option>Clothing</option>
+          <option>Shoes</option>
+          <option>Accessories</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Sort</label>
+        <select id="sortBy">
+          <option value="popular">Most relevant</option>
+          <option value="price_asc">Price: low → high</option>
+          <option value="price_desc">Price: high → low</option>
+        </select>
+      </div>
+
+      <hr style="margin:12px 0;border:none;border-top:1px solid #f0f0f3" />
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="badge">Free delivery</div>
+        <div style="color:var(--muted);font-size:13px">Safe payments</div>
+      </div>
+
+      <hr style="margin:12px 0;border:none;border-top:1px solid #f0f0f3" />
+
+      <div>
+        <strong>Post an item</strong>
+        <p style="color:var(--muted);font-size:13px">Quick add an item to your shop (local demo only)</p>
+        <button class="small" id="openListing">Add Listing</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Center content -->
+  <section>
+    <div class="controls">
+      <div style="flex:1;color:var(--muted)" id="resultCount">-- results</div>
+      <div style="display:flex;gap:8px">
+        <input id="search" placeholder="Search within results..." style="padding:8px;border-radius:8px;border:1px solid #eef2f6" />
+      </div>
+    </div>
+
+    <div class="grid" id="productGrid">
+      <!-- cards injected here -->
+    </div>
+  </section>
+</main>
+
+<!-- Cart Drawer -->
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <div style="font-weight:700">Your cart</div>
+    <div>
+      <button class="btn alt" id="closeCart">Close</button>
+    </div>
+  </div>
+
+  <div class="cart-items" id="cartItems"><!-- js --></div>
+
+  <div class="cart-footer">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="color:var(--muted)">Subtotal</div>
+      <div style="font-weight:700">GHS <span id="subtotal">0.00</span></div>
+    </div>
+    <button class="btn" id="checkoutBtn">Checkout</button>
+  </div>
+</aside>
+
+<!-- Modals -->
+<div id="modals"></div>
+
+<script src="scripts/index.js"></script>
+</body>
+</html>

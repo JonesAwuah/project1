@@ -1,0 +1,488 @@
+<!-- AJ Fashion Galaxy - Template
+     Single-file HTML/CSS/JS template inspired by Vinted
+     Features:
+     - Responsive homepage + shop layout
+     - Search, category filters, sort
+     - Product cards, product detail modal
+     - Add-listing form (client-side, stores to localStorage)
+     - Cart drawer with persistence and checkout placeholder
+     - Simple Login/Register modal (UI-only)
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AJ Fashion Galaxy</title>
+  <meta name="description" content="AJ Fashion Galaxy - Buy & sell clothing, shoes and accessories" />
+  <style>
+    :root{
+      --bg:#f7f7fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#1f2937; /* dark slate */
+      --accent-2:#ff6b6b; /* optional brand pop */
+      --radius:12px;
+      --glass: rgba(255,255,255,0.6);
+      --shadow: 0 6px 18px rgba(15,23,42,0.08);
+      --max-width:1200px;
+      --container-padding:20px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:#111}
+    a{color:inherit}
+    header{background:linear-gradient(90deg,#ffffffcc, #ffffffcc);backdrop-filter:blur(6px);position:sticky;top:0;z-index:40;box-shadow:0 1px 0 rgba(0,0,0,0.04)}
+    .nav{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;gap:16px;padding:14px var(--container-padding);}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700}
+    .brand .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent-2),#ffb86b);display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
+    .nav .search{flex:1;display:flex;align-items:center;gap:8px}
+    .search input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e6e9ef;background:white}
+    .nav .actions{display:flex;gap:8px;align-items:center}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer}
+    .btn.alt{background:transparent;color:var(--accent);border:1px solid #e6e9ef}
+
+    .hero{max-width:var(--max-width);margin:22px auto;padding:0 var(--container-padding);display:flex;gap:20px;align-items:center}
+    .hero-left{flex:1}
+    .hero-right{width:320px}
+    .hero h1{font-size:28px;margin:0 0 8px}
+    .hero p{margin:0;color:var(--muted)}
+
+    .main{max-width:var(--max-width);margin:18px auto;padding:0 var(--container-padding);display:grid;grid-template-columns:260px 1fr;gap:20px}
+
+    /* filters */
+    .panel{background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+    .filters h4{margin:0 0 10px;font-size:14px}
+    .categories{display:flex;flex-direction:column;gap:8px}
+    .chip{padding:8px 10px;border-radius:999px;border:1px solid #eef2f6;background:transparent;cursor:pointer;font-size:13px;color:var(--muted)}
+    .chip.active{background:var(--accent);color:white;border:none}
+
+    /* product grid */
+    .controls{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .card .media{height:240px;background:#f3f4f6;display:flex;align-items:center;justify-content:center}
+    .card img{width:100%;height:100%;object-fit:cover}
+    ..card .body{padding:12px;display:flex;flex-direction:column;gap:8px}
+    .meta{display:flex;justify-content:space-between;align-items:center}
+    .title{font-weight:600}
+    .price{font-weight:700}
+    .desc{color:var(--muted);font-size:13px}
+    .card .actions{display:flex;gap:8px;margin-top:8px}
+    .small{font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid #eef2f6;background:transparent;cursor:pointer}
+
+    /* cart drawer */
+    .cart-drawer{position:fixed;right:0;top:0;height:100vh;width:380px;background:var(--card);box-shadow:-14px 0 40px rgba(15,23,42,0.15);transform:translateX(110%);transition:transform .28s;display:flex;flex-direction:column}
+    .cart-drawer.open{transform:translateX(0)}
+    .cart-head{padding:16px;border-bottom:1px solid #f0f0f3;display:flex;align-items:center;justify-content:space-between}
+    .cart-items{padding:12px;overflow:auto;flex:1}
+    .cart-line{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px dashed #f0f0f3}
+    .cart-footer{padding:16px;border-top:1px solid #f0f0f3}
+
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(6,8,15,0.45);display:flex;align-items:center;justify-content:center;z-index:60}
+    .modal{width:960px;max-width:96%;background:var(--card);border-radius:14px;overflow:hidden;display:grid;grid-template-columns:1fr 420px}
+    .modal .media{height:420px}
+    .modal .content{padding:18px}
+
+    /* forms */
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type=text], input[type=number], textarea, select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;margin-bottom:10px}
+
+    /* utility */
+    .center{display:flex;align-items:center;justify-content:center}
+    @media (max-width:1000px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .main{grid-template-columns:1fr}
+      .hero-right{display:none}
+      .modal{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .grid{grid-template-columns:repeat(1,1fr)}
+      .nav .search{display:none}
+    }
+
+    /* small touches */
+    .badge{font-size:12px;padding:6px 8px;border-radius:999px;background:#f1f5f9;color:#111}
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="logo">AJ</div>
+      <div>
+        <div style="font-size:14px">AJ Fashion Galaxy</div>
+        <div style="font-size:11px;color:var(--muted)">Buy • Sell • Discover</div>
+      </div>
+    </div>
+
+    <div class="search">
+      <input id="topSearch" placeholder="Search clothes, shoes, accessories..." />
+    </div>
+
+    <div class="actions">
+      <button class="btn alt" id="sellBtn">Sell</button>
+      <button class="btn alt" id="loginBtn">Login</button>
+      <button class="btn" id="openCart">Cart (<span id="cartNum">0</span>)</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-left">
+    <h1>Welcome to AJ Fashion Galaxy</h1>
+    <p>Curated pre-loved & new fashion — clothes, shoes and accessories. Inspired by the clean marketplace layout you like.</p>
+  </div>
+  <div class="hero-right panel">
+    <div style="font-weight:700">Quick Filters</div>
+    <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="chip" data-cat="Clothing">Clothing</button>
+      <button class="chip" data-cat="Shoes">Shoes</button>
+      <button class="chip" data-cat="Accessories">Accessories</button>
+      <button class="chip" data-cat="All">All</button>
+    </div>
+  </div>
+</section>
+
+<main class="main">
+  <aside class="panel">
+    <div class="filters">
+      <h4>Filters</h4>
+      <div style="margin-bottom:8px">
+        <label>Category</label>
+        <select id="filterCategory">
+          <option>All</option>
+          <option>Clothing</option>
+          <option>Shoes</option>
+          <option>Accessories</option>
+        </select>
+      </div>
+      <div>
+        <label>Sort</label>
+        <select id="sortBy">
+          <option value="popular">Most relevant</option>
+          <option value="price_asc">Price: low → high</option>
+          <option value="price_desc">Price: high → low</option>
+        </select>
+      </div>
+      <hr style="margin:12px 0;border:none;border-top:1px solid #f0f0f3" />
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="badge">Free delivery</div>
+        <div style="color:var(--muted);font-size:13px">Safe payments</div>
+      </div>
+      <hr style="margin:12px 0;border:none;border-top:1px solid #f0f0f3" />
+      <div>
+        <strong>Post an item</strong>
+        <p style="color:var(--muted);font-size:13px">Quick add an item to your shop (local demo only)</p>
+        <button class="small" id="openListing">Add Listing</button>
+      </div>
+    </div>
+  </aside>
+
+  <section>
+    <div class="controls">
+      <div style="flex:1;color:var(--muted)" id="resultCount">-- results</div>
+      <div style="display:flex;gap:8px">
+        <input id="search" placeholder="Search within results..." style="padding:8px;border-radius:8px;border:1px solid #eef2f6" />
+      </div>
+    </div>
+
+    <div class="grid" id="productGrid">
+      <!-- cards injected here -->
+    </div>
+  </section>
+</main>
+
+<!-- Cart Drawer -->
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <div style="font-weight:700">Your cart</div>
+    <div>
+      <button class="btn alt" id="closeCart">Close</button>
+    </div>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <!-- items -> js -->
+  </div>
+  <div class="cart-footer">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="color:var(--muted)">Subtotal</div>
+      <div style="font-weight:700">GHS <span id="subtotal">0.00</span></div>
+    </div>
+    <button class="btn" id="checkoutBtn">Checkout</button>
+  </div>
+</aside>
+
+<!-- Modals: product detail, listing form, login, checkout confirmation -->
+<div id="modals"></div>
+
+<script>
+/* ==========================
+   Simple client-side app
+   - products persisted to localStorage under key 'aj_products'
+   - cart persisted to 'aj_cart'
+   - Add listing adds product to storage
+   - Checkout shows a simple form and clears cart
+   ==========================*/
+
+const DEF_PRODUCTS = [
+  {id: 'p1', title: 'Everyday Tee', category: 'Clothing', price: 18.00, img: 'https://images.unsplash.com/photo-1520975913558-4b6b7b1d6f7b?q=80&w=1200&auto=format&fit=crop', desc: 'Soft cotton tee, perfect for daily wear.'},
+  {id: 'p2', title: 'Classic Sneakers', category: 'Shoes', price: 64.99, img: 'https://images.unsplash.com/photo-1519741491226-1a1c9f6f9f53?q=80&w=1200&auto=format&fit=crop', desc: 'Comfortable low-top sneakers.'},
+  {id: 'p3', title: 'Denim Jacket', category: 'Clothing', price: 89.50, img: 'https://images.unsplash.com/photo-1530845640856-1c7b5d5ec7ea?q=80&w=1200&auto=format&fit=crop', desc: 'Classic denim with vintage wash.'},
+  {id: 'p4', title: 'Leather Belt', category: 'Accessories', price: 29.00, img: 'https://images.unsplash.com/photo-1600654339237-1f4e3e7f7b58?q=80&w=1200&auto=format&fit=crop', desc: 'Full-grain leather belt.'},
+  {id: 'p5', title: 'Running Shorts', category: 'Clothing', price: 24.99, img: 'https://images.unsplash.com/photo-1549989471-3b6b3adf4b6f?q=80&w=1200&auto=format&fit=crop', desc: 'Lightweight breathable shorts.'}
+];
+
+const LS_PRODUCTS = 'aj_products_v1';
+const LS_CART = 'aj_cart_v1';
+
+let products = loadProducts();
+let cart = loadCart();
+let currentFilter = 'All';
+let currentQuery = '';
+let currentSearch = '';
+
+const productGrid = document.getElementById('productGrid');
+const filterCategory = document.getElementById('filterCategory');
+const sortBy = document.getElementById('sortBy');
+const search = document.getElementById('search');
+const topSearch = document.getElementById('topSearch');
+const resultCount = document.getElementById('resultCount');
+const cartDrawer = document.getElementById('cartDrawer');
+const openCart = document.getElementById('openCart');
+const closeCart = document.getElementById('closeCart');
+const cartNum = document.getElementById('cartNum');
+const cartItems = document.getElementById('cartItems');
+const subtotalEl = document.getElementById('subtotal');
+const modals = document.getElementById('modals');
+const sellBtn = document.getElementById('sellBtn');
+const openListing = document.getElementById('openListing');
+const loginBtn = document.getElementById('loginBtn');
+const checkoutBtn = document.getElementById('checkoutBtn');
+
+// quick chips
+Array.from(document.querySelectorAll('.chip')).forEach(ch => ch.addEventListener('click',()=>{
+  const cat = ch.dataset.cat; filterCategory.value = cat; filterAndRender();
+}));
+
+sellBtn.addEventListener('click', ()=> showListingModal());
+openListing.addEventListener('click', ()=> showListingModal());
+loginBtn.addEventListener('click', ()=> showLoginModal());
+
+openCart.addEventListener('click', ()=> cartDrawer.classList.add('open'));
+closeCart.addEventListener('click', ()=> cartDrawer.classList.remove('open'));
+checkoutBtn.addEventListener('click', ()=> showCheckoutModal());
+
+filterCategory.addEventListener('change', ()=>{filterAndRender();});
+sortBy.addEventListener('change', ()=>{filterAndRender();});
+search.addEventListener('input', (e)=>{currentSearch = e.target.value; filterAndRender();});
+topSearch.addEventListener('input',(e)=>{currentQuery = e.target.value; filterAndRender();});
+
+render();
+
+/* ======== Data Persist ======== */
+function loadProducts(){
+  try{
+    const raw = localStorage.getItem(LS_PRODUCTS);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  localStorage.setItem(LS_PRODUCTS, JSON.stringify(DEF_PRODUCTS));
+  return DEF_PRODUCTS.slice();
+}
+function saveProducts(){ localStorage.setItem(LS_PRODUCTS, JSON.stringify(products)); }
+function loadCart(){
+  try{ const raw = localStorage.getItem(LS_CART); if(raw) return JSON.parse(raw);}catch(e){}
+  return [];
+}
+function saveCart(){ localStorage.setItem(LS_CART, JSON.stringify(cart)); }
+
+/* ======== Render ======== */
+function render(){
+  filterAndRender();
+  renderCart();
+}
+
+function filterAndRender(){
+  const cat = filterCategory.value || 'All';
+  let list = products.filter(p => (cat === 'All' || p.category === cat));
+  const q = (currentSearch || currentQuery || '').trim().toLowerCase();
+  if(q) list = list.filter(p => (p.title + ' ' + p.desc + ' ' + p.category).toLowerCase().includes(q));
+  const sort = sortBy.value;
+  if(sort === 'price_asc') list.sort((a,b)=>a.price-b.price);
+  if(sort === 'price_desc') list.sort((a,b)=>b.price-a.price);
+  resultCount.textContent = `${list.length} result(s)`;
+  renderProducts(list);
+}
+
+function renderProducts(list){
+  productGrid.innerHTML = '';
+  if(!list.length){ productGrid.innerHTML = '<div style="grid-column:1/-1;color:var(--muted)">No results found</div>'; return }
+  list.forEach(p => {
+    const el = document.createElement('article'); el.className = 'card';
+    el.innerHTML = `
+      <div class="media"><img src="${p.img}" alt="${escapeHtml(p.title)}"></div>
+      <div class="body">
+        <div class="meta"><div class="title">${escapeHtml(p.title)}</div><div class="price">GHS ${p.price.toFixed(2)}</div></div>
+        <div class="desc">${escapeHtml(p.desc)}</div>
+        <div class="actions">
+          <button class="small" data-id="${p.id}" onclick="viewProduct('${p.id}')">View</button>
+          <button class="small" onclick="addToCart('${p.id}')">Add</button>
+        </div>
+      </div>
+    `;
+    productGrid.appendChild(el);
+  });
+}
+
+/* ======= Product View ======= */
+window.viewProduct = function(id){
+  const p = products.find(x=>x.id===id); if(!p) return;
+  modals.innerHTML = `
+    <div class="modal-backdrop" onclick="closeModal(event)">
+      <div class="modal" onclick="event.stopPropagation()">
+        <div class="media"><img src="${p.img}" alt="${escapeHtml(p.title)}" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="content">
+          <h2 style="margin:0">${escapeHtml(p.title)}</h2>
+          <div style="color:var(--muted);margin:6px 0">${escapeHtml(p.category)}</div>
+          <div style="font-weight:700;font-size:20px">GHS ${p.price.toFixed(2)}</div>
+          <p style="color:var(--muted)">${escapeHtml(p.desc)}</p>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button class="btn" onclick="addToCart('${p.id}'); closeModal()">Add to Cart</button>
+            <button class="btn alt" onclick="closeModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+function closeModal(e){ modals.innerHTML = ''; }
+
+/* ======= Cart ======= */
+window.addToCart = function(id){
+  const p = products.find(x=>x.id===id); if(!p) return;
+  const existing = cart.find(c => c.id === id);
+  if(existing) existing.qty += 1; else cart.push({id:p.id,title:p.title,price:p.price,qty:1});
+  saveCart(); renderCart(); cartDrawer.classList.add('open');
+}
+function renderCart(){
+  cartItems.innerHTML = '';
+  let total = 0; cart.forEach(item => {
+    total += item.price * item.qty;
+    const line = document.createElement('div'); line.className='cart-line';
+    line.innerHTML = `
+      <div style="flex:1">
+        <div style="font-weight:600">${escapeHtml(item.title)}</div>
+        <div style="color:var(--muted);font-size:13px">GHS ${item.price.toFixed(2)} × ${item.qty}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+        <div style="display:flex;gap:6px"><button class="small" onclick="decrease('${item.id}')">-</button><button class="small" onclick="increase('${item.id}')">+</button></div>
+        <button class="small" onclick="removeFromCart('${item.id}')">Remove</button>
+      </div>
+    `;
+    cartItems.appendChild(line);
+  });
+  cartNum.textContent = cart.reduce((s,i)=>s+i.qty,0);
+  subtotalEl.textContent = total.toFixed(2);
+  saveCart();
+}
+window.removeFromCart = function(id){ cart = cart.filter(i=>i.id!==id); renderCart(); }
+window.increase = function(id){ const it = cart.find(i=>i.id===id); if(it){it.qty++; renderCart();} }
+window.decrease = function(id){ const it = cart.find(i=>i.id===id); if(it){ it.qty = Math.max(1,it.qty-1); renderCart(); } }
+
+/* ===== Listing form (client-side) ===== */
+function showListingModal(){
+  modals.innerHTML = `
+    <div class="modal-backdrop" onclick="closeModal(event)">
+      <div class="modal" onclick="event.stopPropagation()">
+        <div style="padding:18px;overflow:auto">
+          <h3>Add a new listing</h3>
+          <div>
+            <label>Title</label><input id="lst_title" type="text" />
+            <label>Category</label><select id="lst_cat"><option>Clothing</option><option>Shoes</option><option>Accessories</option></select>
+            <label>Price (GHS)</label><input id="lst_price" type="number" step="0.01" />
+            <label>Image URL</label><input id="lst_img" type="text" placeholder="https://..." />
+            <label>Description</label><textarea id="lst_desc" rows="4"></textarea>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn" id="saveListing">Save</button>
+              <button class="btn alt" onclick="closeModal()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  document.getElementById('saveListing').addEventListener('click', ()=>{
+    const title = document.getElementById('lst_title').value.trim();
+    const category = document.getElementById('lst_cat').value;
+    const price = parseFloat(document.getElementById('lst_price').value)||0;
+    const img = document.getElementById('lst_img').value.trim()||'https://images.unsplash.com/photo-1520975913558-4b6b7b1d6f7b?q=80&w=1200&auto=format&fit=crop';
+    const desc = document.getElementById('lst_desc').value.trim();
+    if(!title){ alert('Please add a title'); return; }
+    const id = 'p'+Date.now();
+    products.unshift({id,title,category,price,img,desc}); saveProducts(); filterAndRender(); closeModal();
+  });
+}
+
+/* ===== Login Modal (UI-only) ===== */
+function showLoginModal(){
+  modals.innerHTML = `
+    <div class="modal-backdrop" onclick="closeModal(event)">
+      <div class="modal" style="max-width:420px" onclick="event.stopPropagation()">
+        <div style="padding:18px">
+          <h3>Login / Register</h3>
+          <label>Email</label><input id="lg_email" type="text" />
+          <label>Password</label><input id="lg_pass" type="password" />
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn" onclick="alert('Demo: login simulated')">Login</button>
+            <button class="btn alt" onclick="alert('Demo: register simulated')">Register</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ===== Checkout ===== */
+function showCheckoutModal(){
+  if(cart.length===0){ alert('Cart is empty'); return; }
+  modals.innerHTML = `
+    <div class="modal-backdrop" onclick="closeModal(event)">
+      <div class="modal" style="max-width:640px" onclick="event.stopPropagation()">
+        <div style="padding:18px">
+          <h3>Checkout</h3>
+          <label>Full name</label><input id="co_name" type="text" />
+          <label>Phone</label><input id="co_phone" type="text" />
+          <label>Delivery address</label><input id="co_addr" type="text" />
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn" id="placeOrder">Place order</button>
+            <button class="btn alt" onclick="closeModal()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  document.getElementById('placeOrder').addEventListener('click', ()=>{
+    // In a real app you'd call a backend / payment gateway. Here we'll just simulate success.
+    const name = document.getElementById('co_name').value.trim();
+    if(!name){ alert('Please enter name'); return; }
+    // simulate order
+    const order = {id:'ORD'+Date.now(), items:cart.slice(), total:cart.reduce((s,i)=>s+i.price*i.qty,0), name};
+    // clear cart
+    cart = []; saveCart(); renderCart(); closeModal(); cartDrawer.classList.remove('open');
+    alert('Order placed — ' + order.id + '\nThank you ' + order.name + '!');
+  });
+}
+
+/* ===== util ===== */
+function escapeHtml(s){ if(!s) return ''; return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+
+// Expose remove/increase functions for inline onclick usage
+window.removeFromCart = removeFromCart; window.increase = increase; window.decrease = decrease; window.addToCart = addToCart; window.viewProduct = viewProduct;
+
+</script>
+
+</body>
+</html>
