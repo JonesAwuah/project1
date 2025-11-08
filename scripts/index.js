@@ -136,21 +136,31 @@ function viewProduct(id) {
   if (!p) return;
   modals.innerHTML = `
   <div class="modal-backdrop" onclick="closeModal(event)">
-    <div class="modal" onclick="event.stopPropagation()" style="max-width:600px;">
-      <div class="media" style="text-align:center; margin-bottom:16px;">
+    <div class="modal" onclick="event.stopPropagation()" style="max-width:700px; position:relative;">
+      
+      <!-- Close Button -->
+      <button onclick="closeModal()" 
+              style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:22px; cursor:pointer;">
+        &times;
+      </button>
+
+      <!-- Product Image -->
+      <div class="media" style="text-align:center; margin-bottom:20px;">
         <img src="${p.img}" 
-             style="width:100%; height:auto; max-height:400px; object-fit:contain; border-radius:8px;">
+             style="width:100%; height:auto; max-height:550px; object-fit:contain; border-radius:10px;">
       </div>
+
+      <!-- Product Content -->
       <div class="content" style="text-align:center;">
         <h3>${escapeHtml(p.title)}</h3>
         <p>${escapeHtml(p.desc)}</p>
-        <div style="font-weight:700; margin:8px 0;">GHS ${p.price.toFixed(2)}</div>
+        <div style="font-weight:700; margin:10px 0;">GHS ${p.price.toFixed(2)}</div>
         <button class="btn" onclick="addToCart('${p.id}')">Add to Cart</button>
       </div>
+
     </div>
   </div>`;
 }
-
 // --- LOGIN MODAL ---
 function showLoginModal() {
   modals.innerHTML = `
