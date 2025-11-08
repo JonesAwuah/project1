@@ -51,19 +51,19 @@
 </section>
 
 <main class="main">
-  <!-- Left sidebar -->
-  <aside class="panel">
-    <div class="filters">
-      <h4>Filters</h4>
+  <!-- LEFT SIDEBAR -->
+<aside class="panel">
+  <div class="filters">
+    <h4>Filters</h4>
 
-      <div style="margin-bottom:8px">
-        <label>Category</label>
-        <select id="filterCategory">
-          <option>All</option>
-          <option>Clothing</option>
-          <option>Shoes</option>
-          <option>Accessories</option>
-        </select>
+    <div style="margin-bottom:8px">
+      <label>Category</label>
+      <select id="filterCategory" onchange="onCategoryChange(this.value)">
+        <option>All</option>
+        <option>Clothing</option>
+        <option>Shoes</option>
+        <option>Accessories</option>
+      </select>
       </div>
 
       <div>

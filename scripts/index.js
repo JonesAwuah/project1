@@ -70,13 +70,13 @@ function renderProducts(list = products) {
 }
 
 // --- FILTER / SEARCH ---
-function filterAndRender(category = null, query = '') {
+  function filterAndRender(category = null, query = '') {
     let filtered = [...products];
     if (category && category !== 'All') {
       filtered = filtered.filter(p => p.category === category);
     }
     if (query) {
-      filtered = filtered.filter(p => 
+      filtered = filtered.filter(p =>
         p.title.toLowerCase().includes(query.toLowerCase())
       );
     }
@@ -87,8 +87,25 @@ function filterAndRender(category = null, query = '') {
   function setActiveFilter(button) {
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
+    
+    // also update dropdown
+    const select = document.getElementById('filterCategory');
+    if (select) select.value = button.textContent;
   }
 
+  // --- SIDEBAR CATEGORY CHANGE ---
+  function onCategoryChange(value) {
+    filterAndRender(value);
+
+    // also highlight matching quick filter button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent === value);
+      if (value === 'All' && btn.textContent === 'All') btn.classList.add('active');
+    });
+  }
+
+
+  
 // --- CART FUNCTIONS ---
 function addToCart(id) {
   const item = products.find(p => p.id === id);
