@@ -108,32 +108,36 @@ function renderProducts(list = products) {
 
 
 
-
-// Keep track of the currently active category
+// --- FILTER + SORT FUNCTION ---
+/// Track current category and search query
 let currentCategory = 'All';
+let currentQuery = '';
 
 // --- FILTER + SORT FUNCTION ---
-function filterAndRender(category = currentCategory, query = '') {
-  currentCategory = category; // update current category
+function filterAndRender(category = currentCategory, query = currentQuery) {
+  currentCategory = category;
+  currentQuery = query;
+
+  // Start with all products
   let filtered = [...products];
 
-  // Filter by category
+  // 1️⃣ Filter by category
   if (category && category !== 'All') {
     filtered = filtered.filter(p => p.category === category);
   }
 
-  // Filter by search query if any
+  // 2️⃣ Filter by search query (optional)
   if (query) {
     filtered = filtered.filter(p =>
       p.title.toLowerCase().includes(query.toLowerCase())
     );
   }
 
-  // Apply sort
+  // 3️⃣ Apply sorting
   const sortValue = document.getElementById('sortBy').value;
   filtered = sortProducts(filtered, sortValue);
 
-  // Render products
+  // Render filtered + sorted products
   renderProducts(filtered);
 }
 
@@ -144,17 +148,45 @@ function sortProducts(list, sortValue) {
       return list.sort((a, b) => a.price - b.price);
     case 'price_desc':
       return list.sort((a, b) => b.price - a.price);
-    default: // popular or most relevant
-      return list; // keep original order
+    default:
+      return list; // "Most relevant" or original order
   }
 }
 
 // --- SORT CHANGE HANDLER ---
 function applySort(value) {
-  // Reapply filter and render based on current category
-  filterAndRender(currentCategory);
+  // Re-render current category and query with new sort
+  filterAndRender(currentCategory, currentQuery);
 }
 
+// --- OPTIONAL: SEARCH INTEGRATION ---
+document.getElementById('search').addEventListener('input', e => {
+  currentQuery = e.target.value.trim();
+  filterAndRender(currentCategory, currentQuery);
+});
+
+// --- QUICK FILTER BUTTONS & SIDEBAR CATEGORY SELECT ---
+// Example integration for buttons/select
+function setActiveFilter(button) {
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
+
+  const select = document.getElementById('filterCategory');
+  if (select) select.value = button.textContent;
+
+  filterAndRender(button.textContent, currentQuery);
+}
+
+function onCategoryChange(value) {
+  currentCategory = value;
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === value);
+    if (value === 'All' && btn.textContent === 'All') btn.classList.add('active');
+  });
+
+  filterAndRender(value, currentQuery);
+}
 
 
 
