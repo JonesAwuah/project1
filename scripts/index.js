@@ -136,12 +136,15 @@ function viewProduct(id) {
   if (!p) return;
   modals.innerHTML = `
   <div class="modal-backdrop" onclick="closeModal(event)">
-    <<div class="modal" onclick="event.stopPropagation()"> <div class="media"><img src="${p.img}" style="width:100%; height:auto; max-height:400px; object-fit:contain;"></div>
+    <div class="modal" onclick="event.stopPropagation()" style="max-width:600px;">
+      <div class="media" style="text-align:center; margin-bottom:16px;">
+        <img src="${p.img}" 
+             style="width:100%; height:auto; max-height:400px; object-fit:contain; border-radius:8px;">
       </div>
-      <div class="content">
+      <div class="content" style="text-align:center;">
         <h3>${escapeHtml(p.title)}</h3>
         <p>${escapeHtml(p.desc)}</p>
-        <div style="font-weight:700;margin:8px 0">GHS ${p.price.toFixed(2)}</div>
+        <div style="font-weight:700; margin:8px 0;">GHS ${p.price.toFixed(2)}</div>
         <button class="btn" onclick="addToCart('${p.id}')">Add to Cart</button>
       </div>
     </div>
