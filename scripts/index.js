@@ -136,8 +136,8 @@ function viewProduct(id) {
   if (!p) return;
   modals.innerHTML = `
   <div class="modal-backdrop" onclick="closeModal(event)">
-    <div class="modal" onclick="event.stopPropagation()">
-      <div class="media"><img src="${p.img}" style="width:100%;height:100%;object-fit:cover"></div>
+    <div class="modal" onclick="event.stopPropagation()"> style="width:100%; height:auto; max-height:400px; object-fit:contain;">
+      </div>
       <div class="content">
         <h3>${escapeHtml(p.title)}</h3>
         <p>${escapeHtml(p.desc)}</p>
