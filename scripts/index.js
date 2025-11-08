@@ -112,21 +112,31 @@ function renderCart() {
   const container = document.getElementById('cartItems');
   const subtotal = document.getElementById('subtotal');
   document.getElementById('cartNum').textContent = cart.reduce((s, i) => s + i.qty, 0);
-  container.innerHTML = cart.map(i => `
-    <div class="cart-line" style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-      <img src="${i.img}" style="width:55px;height:55px;object-fit:cover;border-radius:6px;">
-      <div style="flex:1">
-        <div>${escapeHtml(i.title)}</div>
-        <div style="font-size:13px;color:var(--muted)">GHS ${i.price.toFixed(2)}</div>
-        <div style="display:flex;gap:6px;align-items:center;margin-top:4px">
-          <button class="small" onclick="decrease('${i.id}')">-</button>
-          <span>${i.qty}</span>
-          <button class="small" onclick="increase('${i.id}')">+</button>
-        </div>
-      </div>
-      <button class="small" onclick="removeFromCart('${i.id}')">x</button>
+
+  // Add a header with close button above the items
+  container.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <h3 style="margin:0;">Your Cart</h3>
+      <button onclick="cartDrawer.classList.remove('open')" 
+              style="background:none;border:none;font-size:22px;cursor:pointer;">&times;</button>
     </div>
-  `).join('');
+    ${cart.map(i => `
+      <div class="cart-line" style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <img src="${i.img}" style="width:55px;height:55px;object-fit:cover;border-radius:6px;">
+        <div style="flex:1">
+          <div>${escapeHtml(i.title)}</div>
+          <div style="font-size:13px;color:var(--muted)">GHS ${i.price.toFixed(2)}</div>
+          <div style="display:flex;gap:6px;align-items:center;margin-top:4px">
+            <button class="small" onclick="decrease('${i.id}')">-</button>
+            <span>${i.qty}</span>
+            <button class="small" onclick="increase('${i.id}')">+</button>
+          </div>
+        </div>
+        <button class="small" onclick="removeFromCart('${i.id}')">x</button>
+      </div>
+    `).join('')}
+  `;
+
   subtotal.textContent = cart.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2);
 }
 
