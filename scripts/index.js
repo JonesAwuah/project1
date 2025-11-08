@@ -10,24 +10,6 @@ const cartDrawer = document.getElementById('cartDrawer');
 const productGrid = document.getElementById('productGrid');
 
 
-// SELL PAGE
-document.getElementById('sellBtn').addEventListener('click', function() {
-  const username = prompt('Enter admin username:');
-  const password = prompt('Enter admin password:');
-
-  // Set your admin credentials here
-  const adminUser = 'admin';
-  const adminPass = '12345';
-
-  if (username === adminUser && password === adminPass) {
-    window.location.href = 'sell.html';
-  } else if (username === null || password === null) {
-    // user cancelled
-    return;
-  } else {
-    alert('Access denied! Invalid username or password.');
-  }
-});
 
 
 // --- LOAD DEFAULT DEMO PRODUCTS ---

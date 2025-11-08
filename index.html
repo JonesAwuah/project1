@@ -129,7 +129,25 @@
 
 <!-- Modals -->
 <div id="modals"></div>
+<script>
+  document.getElementById('sellBtn').addEventListener('click', function() {
+    const username = prompt('Enter admin username:');
+    const password = prompt('Enter admin password:');
 
+    // Set your own admin credentials here
+    const adminUser = 'admin';
+    const adminPass = '12345';
+
+    if (username === adminUser && password === adminPass) {
+      window.location.href = 'sell.html';
+    } else if (username === null || password === null) {
+      // Cancelled prompt — do nothing
+      return;
+    } else {
+      alert('Access denied! Invalid username or password.');
+    }
+  });
+</script>
 <script src="scripts/index.js"></script>
 </body>
 </html>
