@@ -113,8 +113,8 @@ function renderCart() {
   const subtotal = document.getElementById('subtotal');
   document.getElementById('cartNum').textContent = cart.reduce((s, i) => s + i.qty, 0);
   container.innerHTML = cart.map(i => `
-    <div class="cart-line">
-      <img src="${i.img}" class="cart-img">
+    <div class="cart-line" style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+      <img src="${i.img}" style="width:55px;height:55px;object-fit:cover;border-radius:6px;">
       <div style="flex:1">
         <div>${escapeHtml(i.title)}</div>
         <div style="font-size:13px;color:var(--muted)">GHS ${i.price.toFixed(2)}</div>
