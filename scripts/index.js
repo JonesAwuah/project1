@@ -105,7 +105,65 @@ function renderProducts(list = products) {
   }
 
 
-  
+
+
+
+
+// Keep track of the currently active category
+let currentCategory = 'All';
+
+// --- FILTER + SORT FUNCTION ---
+function filterAndRender(category = currentCategory, query = '') {
+  currentCategory = category; // update current category
+  let filtered = [...products];
+
+  // Filter by category
+  if (category && category !== 'All') {
+    filtered = filtered.filter(p => p.category === category);
+  }
+
+  // Filter by search query if any
+  if (query) {
+    filtered = filtered.filter(p =>
+      p.title.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  // Apply sort
+  const sortValue = document.getElementById('sortBy').value;
+  filtered = sortProducts(filtered, sortValue);
+
+  // Render products
+  renderProducts(filtered);
+}
+
+// --- SORT FUNCTION ---
+function sortProducts(list, sortValue) {
+  switch (sortValue) {
+    case 'price_asc':
+      return list.sort((a, b) => a.price - b.price);
+    case 'price_desc':
+      return list.sort((a, b) => b.price - a.price);
+    default: // popular or most relevant
+      return list; // keep original order
+  }
+}
+
+// --- SORT CHANGE HANDLER ---
+function applySort(value) {
+  // Reapply filter and render based on current category
+  filterAndRender(currentCategory);
+}
+
+
+
+
+
+
+
+
+
+
 // --- CART FUNCTIONS ---
 function addToCart(id) {
   const item = products.find(p => p.id === id);
