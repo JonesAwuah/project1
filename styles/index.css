@@ -205,15 +205,13 @@ header {
   object-fit: cover;
 }*/
 .cart-img {
-  width: 90px;           /* You can adjust this for your layout */
-  height: 90px;
+  width: 70px;                /* slightly larger for clarity */
+  height: 70px;
+  object-fit: contain;        /* ensures the full image is shown */
   border-radius: 8px;
-  overflow: hidden;
+  background-color: #fafafa;  /* subtle contrast background */
+  padding: 4px;
   flex-shrink: 0;
-  background: #f9f9f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .cart-img img {
   width: 100%;
@@ -307,9 +305,20 @@ header {
   display: flex;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px dashed #f0f0f3;
   padding: 10px 0;
+  border-bottom: 1px solid #f0f0f3;
 }
+.cart-line div {
+  flex: 1;
+}
+.cart-line span {
+  min-width: 24px;
+  text-align: center;
+}
+.cart-line button.small {
+  padding: 4px 8px;
+}
+
 
 .cart-footer {
   padding: 16px;

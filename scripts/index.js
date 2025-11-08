@@ -114,7 +114,7 @@ function renderCart() {
   document.getElementById('cartNum').textContent = cart.reduce((s, i) => s + i.qty, 0);
   container.innerHTML = cart.map(i => `
     <div class="cart-line">
-      <img src="${i.img}" style="width:60px;height:60px;object-fit:cover;border-radius:8px">
+      <img src="${i.img}" class="cart-img">
       <div style="flex:1">
         <div>${escapeHtml(i.title)}</div>
         <div style="font-size:13px;color:var(--muted)">GHS ${i.price.toFixed(2)}</div>
