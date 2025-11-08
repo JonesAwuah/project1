@@ -18,7 +18,7 @@ if (products.length === 0) {
       category: 'Women',
       price: 85,
       img: 'images/blouse.jpg',
-      desc: 'Soft cotton premium T-shirt, perfect for daily wear.'
+      desc: 'Lightweight cotton blouse, perfect for for everyday style.' 
     },
     {
       id: 'p2',
@@ -26,7 +26,7 @@ if (products.length === 0) {
       category: 'Men',
       price: 240,
       img: 'images/sneakers.jpg',
-      desc: 'Comfortable sneakers for everyday wear.'
+      desc: 'Easy-going, stylish sneakers perfect for daily wear with ultimate comfort.' 
     },
     {
       id: 'p3',
@@ -34,7 +34,7 @@ if (products.length === 0) {
       category: 'Kids',
       price: 130,
       img: 'images/hoodie.jpg',
-      desc: 'Cozy hoodie for kids, great for all seasons.'
+      desc: 'Kids’ hoodie, soft, warm and cozy, great for all seasons.'
     }
   ];
   saveProducts();
