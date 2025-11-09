@@ -9,8 +9,55 @@ const modals = document.getElementById('modals');
 const cartDrawer = document.getElementById('cartDrawer');
 const productGrid = document.getElementById('productGrid');
 
+// --- SELL ADMIN LOGIN MODAL ---
+function showAdminLogin() {
+  const modals = document.getElementById('modals');
+  modals.innerHTML = `
+  <div class="modal-backdrop" onclick="closeModal(event)">
+    <div class="modal" style="max-width:420px" onclick="event.stopPropagation()">
+      <div style="padding:18px">
+        <h3>Admin Login Required</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:10px">
+          Please enter your admin username and password to access the Sell page.
+        </p>
 
+        <label>Username</label>
+        <input id="adminUser" type="text" style="margin-bottom:8px" />
 
+        <label>Password</label>
+        <input id="adminPass" type="password" style="margin-bottom:12px" />
+
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button class="btn alt" onclick="closeModal()">Cancel</button>
+          <button class="btn" onclick="verifyAdmin()">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// --- VERIFY ADMIN ---
+function verifyAdmin() {
+  const user = document.getElementById('adminUser').value.trim();
+  const pass = document.getElementById('adminPass').value.trim();
+
+  // Demo credentials (change these to your own)
+  const ADMIN_USER = "admin";
+  const ADMIN_PASS = "1234";
+
+  if (user === ADMIN_USER && pass === ADMIN_PASS) {
+    closeModal();
+    window.location.href = "sell.html";
+  } else {
+    alert("Invalid admin credentials. Access denied.");
+  }
+}
+
+// --- SELL BUTTON INTERCEPT ---
+document.querySelector('a[href="sell.html"]').addEventListener('click', function(e) {
+  e.preventDefault();
+  showAdminLogin();
+});
 
 // --- LOAD DEFAULT DEMO PRODUCTS ---
 if (products.length === 0) {
