@@ -210,7 +210,87 @@ function onCategoryChange(value) {
 }
 
 
+// SELL PAGE SCRIPT
+  const authArea = document.getElementById('authArea');
+  const sellForm = document.getElementById('sellForm');
+  const yourListings = document.getElementById('yourListings');
 
+  // --- Product Saving ---
+  document.getElementById('saveProduct').addEventListener('click', () => {
+    const title = document.getElementById('p_title').value.trim();
+    const category = document.getElementById('p_category').value;
+    const price = parseFloat(document.getElementById('p_price').value);
+    const img = document.getElementById('p_img').value.trim();
+    const desc = document.getElementById('p_desc').value.trim();
+
+    if (!title || !price || !img || !desc) {
+      alert('Please fill all fields.');
+      return;
+    }
+
+    const product = {
+      id: 'p' + Date.now(),
+      title,
+      category,
+      price,
+      img,
+      desc
+    };
+
+    const products = JSON.parse(localStorage.getItem('products') || '[]');
+    products.push(product);
+    localStorage.setItem('products', JSON.stringify(products));
+
+    alert('Product added successfully!');
+    clearForm();
+    loadListings();
+  });
+
+  // --- Cancel button ---
+  document.getElementById('cancelProduct').addEventListener('click', clearForm);
+
+  function clearForm() {
+    document.getElementById('p_title').value = '';
+    document.getElementById('p_price').value = '';
+    document.getElementById('p_img').value = '';
+    document.getElementById('p_desc').value = '';
+  }
+
+  // --- Load existing listings ---
+  function loadListings() {
+    yourListings.innerHTML = '';
+    const products = JSON.parse(localStorage.getItem('products') || '[]');
+
+    if (products.length === 0) {
+      yourListings.innerHTML = '<p style="color:var(--muted)">No listings yet.</p>';
+      return;
+    }
+
+    products.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${p.img}" alt="${p.title}" style="width:100%;height:160px;object-fit:cover;border-radius:8px">
+        <h4>${p.title}</h4>
+        <div style="font-size:14px;color:var(--muted)">${p.category}</div>
+        <div style="font-weight:bold;margin-top:4px">GHS ${p.price}</div>
+        <p style="font-size:13px;color:var(--muted)">${p.desc}</p>
+      `;
+      yourListings.appendChild(card);
+    });
+  }
+
+  // --- On Page Load ---
+  window.onload = function() {
+    const isAdmin = localStorage.getItem('isAdmin');
+    if (isAdmin === 'true') {
+      authArea.style.display = 'none';
+      sellForm.style.display = 'block';
+      loadListings();
+    } else {
+      showLogin();
+    }
+  };
 
 
 
