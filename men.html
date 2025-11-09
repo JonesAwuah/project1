@@ -6,7 +6,7 @@
   <title>AJ Fashion Galaxy — Men</title>
   <link rel="stylesheet" href="styles/index.css" />
 </head>
-<body>
+<body data-page="men">
   <!-- keep the exact same header markup as index.html -->
   <header>
     <div class="nav">
@@ -23,11 +23,11 @@
       </div>
 
       <div class="actions">
-  <a href="index.html" class="btn alt">Home</a>
-  <a href="women.html" class="btn alt">Women</a>
-  <a href="kids.html" class="btn alt">Kids</a>
-  <button class="btn" id="openCart">Cart (<span id="cartNum">0</span>)</button>
-</div>
+        <a href="index.html" class="btn alt">Home</a>
+        <a href="women.html" class="btn alt">Women</a>
+        <a href="kids.html" class="btn alt">Kids</a>
+        <button class="btn" id="openCart">Cart (<span id="cartNum">0</span>)</button>
+      </div>
     </div>
   </header>
 
@@ -113,6 +113,24 @@
   </aside>
 
   <div id="modals"></div>
+
   <script src="scripts/index.js"></script>
+  <script>
+    // Filter products for Men page only
+    const bodyPage = document.body.dataset.page; // "men"
+    const prefixMap = { men: "M", women: "W", kids: "K" };
+    const pagePrefix = prefixMap[bodyPage];
+
+    // Re-render products with prefix filter
+    const originalRenderProducts = renderProducts;
+    renderProducts = (list = products) => {
+      if (pagePrefix) {
+        list = list.filter(p => p.id.toUpperCase().startsWith(pagePrefix));
+      }
+      originalRenderProducts(list);
+    };
+
+    // Re-run initial render
+    renderProducts(products);
+  </script>
 </body>
-</html>

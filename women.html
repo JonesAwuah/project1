@@ -6,8 +6,8 @@
   <title>AJ Fashion Galaxy — Women</title>
   <link rel="stylesheet" href="styles/index.css" />
 </head>
-<body>
-  <!-- keep the exact same header markup as index.html -->
+<body data-page="women">
+
   <header>
     <div class="nav">
       <div class="brand">
@@ -114,5 +114,27 @@
 
   <div id="modals"></div>
   <script src="scripts/index.js"></script>
+
+<!-- shared JS -->
+  <script src="scripts/index.js"></script>
+
+  <!-- filter products for Women page -->
+  <script>
+    const bodyPage = document.body.dataset.page; // "women"
+    const prefixMap = { men: "M", women: "W", kids: "K" };
+    const pagePrefix = prefixMap[bodyPage];
+
+    // Override renderProducts to filter by page prefix
+    const originalRenderProducts = renderProducts;
+    renderProducts = (list = products) => {
+      if (pagePrefix) {
+        list = list.filter(p => p.id.toUpperCase().startsWith(pagePrefix));
+      }
+      originalRenderProducts(list);
+    };
+
+    // Initial render
+    renderProducts(products);
+  </script>
 </body>
 </html>

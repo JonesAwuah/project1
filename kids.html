@@ -6,8 +6,7 @@
   <title>AJ Fashion Galaxy — Kids</title>
   <link rel="stylesheet" href="styles/index.css" />
 </head>
-<body>
-  <!-- keep the exact same header markup as index.html -->
+<body data-page="kids">
   <header>
     <div class="nav">
       <div class="brand">
@@ -114,5 +113,15 @@
 
   <div id="modals"></div>
   <script src="scripts/index.js"></script>
+
+  <script>
+    const pagePrefix = "K";
+    const originalRenderProducts = renderProducts;
+    renderProducts = (list = products) => {
+      list = list.filter(p => p.id.toUpperCase().startsWith(pagePrefix));
+      originalRenderProducts(list);
+    };
+    renderProducts(products);
+  </script>
 </body>
 </html>

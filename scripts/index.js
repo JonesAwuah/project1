@@ -34,7 +34,7 @@ document.getElementById('sellBtn').addEventListener('click', function(event) {
 if (products.length === 0) {
   products = [
     {
-      id: 'p1',
+      id: 'W101', // W → Women
       title: 'Women’s Blouse',
       category: 'Clothing',
       price: 85,
@@ -42,7 +42,7 @@ if (products.length === 0) {
       desc: 'Lightweight cotton blouse, perfect for everyday style.' 
     },
     {
-      id: 'p2',
+      id: 'M101', // M → Men
       title: 'Men’s Sneakers',
       category: 'Shoes',
       price: 240,
@@ -50,7 +50,7 @@ if (products.length === 0) {
       desc: 'Easy-going, stylish sneakers perfect for daily wear with ultimate comfort.' 
     },
     {
-      id: 'p3',
+      id: 'K101', // K → Kids
       title: 'Kids Hoodie',
       category: 'Clothing',
       price: 130,
@@ -70,6 +70,56 @@ function saveCart() {
 }
 
 // --- RENDER PRODUCTS ---
+
+
+
+// Determine page type
+const page = document.body.dataset.page; // e.g., <body data-page="women">
+
+function renderProducts(list = products) {
+  let filteredList = [...list];
+
+  // Filter by page
+  if (page === "women") {
+    filteredList = filteredList.filter(p => p.id.toUpperCase().startsWith("W"));
+  } else if (page === "men") {
+    filteredList = filteredList.filter(p => p.id.toUpperCase().startsWith("M"));
+  } else if (page === "kids") {
+    filteredList = filteredList.filter(p => p.id.toUpperCase().startsWith("K"));
+  }
+  // else index.html shows all products
+
+  productGrid.innerHTML = filteredList.map(p => `
+    <div class="card">
+      <div class="media"><img src="${p.img}" alt="${escapeHtml(p.title)}"></div>
+      <div class="body">
+        <div class="meta">
+          <div class="title">${escapeHtml(p.title)}</div>
+          <div class="price">GHS ${p.price.toFixed(2)}</div>
+        </div>
+        <div class="desc">${escapeHtml(p.desc)}</div>
+        <div class="actions">
+          <button class="small" onclick="addToCart('${p.id}')">Add to Cart</button>
+          <button class="small" onclick="viewProduct('${p.id}')">View</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('resultCount').textContent = `${filteredList.length} results`;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 function renderProducts(list = products) {
   productGrid.innerHTML = list.map(p => `
     <div class="card">
