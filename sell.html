@@ -3,59 +3,321 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AJ Fashion Galaxy — Sell</title>
+  <title>AJ Fashion Galaxy - Sell</title>
   <link rel="stylesheet" href="styles/index.css" />
+  <style>
+    :root {
+      --bg:#f7f7fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#1f2937;
+      --accent-2:#ff6b6b;
+      --radius:12px;
+      --shadow:0 6px 18px rgba(15,23,42,0.08);
+      --max-width:1200px;
+      --container-padding:20px;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: #111;
+    }
+
+    header {
+      background: linear-gradient(90deg, #ffffffcc, #ffffffcc);
+      backdrop-filter: blur(6px);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    }
+
+    .nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px var(--container-padding);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .brand .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent-2), #ffb86b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+    }
+
+    .nav .search { flex: 1; }
+    .search input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #e6e9ef;
+    }
+
+    .actions { display: flex; gap: 8px; align-items: center; }
+
+    .btn {
+      background: var(--accent);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn.alt {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid #e6e9ef;
+    }
+
+    .hero {
+      max-width: var(--max-width);
+      margin: 22px auto;
+      padding: 0 var(--container-padding);
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .hero-right.panel {
+      background: var(--card);
+      padding: 16px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 320px;
+    }
+
+    .main {
+      max-width: var(--max-width);
+      margin: 20px auto;
+      padding: 0 var(--container-padding);
+      display: flex;
+      gap: 20px;
+    }
+
+    .panel {
+      background: var(--card);
+      padding: 16px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    aside.panel {
+      width: 260px;
+      flex-shrink: 0;
+    }
+
+    .menu-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .menu-buttons button {
+      padding: 12px;
+      font-weight: 600;
+      background: var(--accent-2);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .menu-buttons button:hover { background: var(--accent); }
+
+    .content-area {
+      flex: 1;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    /* Upload form styles */
+    .form-group {
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-actions {
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  </style>
 </head>
 <body>
-  <!-- same header -->
-  <header>
-    <div class="nav">
-      <div class="brand">
-        <div class="logo">AJ</div>
-        <div>
-          <div style="font-size:14px">AJ Fashion Galaxy</div>
-          <div style="font-size:11px;color:var(--muted)">Buy • Sell • Discover</div>
-        </div>
-      </div>
 
-      <div class="search">
-        <input id="topSearch" placeholder="Search clothes, shoes, accessories..." />
-      </div>
-
-      <div class="actions">
-        <button class="btn alt" id="womenBtn">Women</button>
-        <button class="btn alt" id="menBtn">Men</button>
-        <button class="btn alt" id="kidsBtn">Kids</button>
-        <button class="btn" id="openCart">Cart (<span id="cartNum">0</span>)</button>
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="logo">AJ</div>
+      <div>
+        <div style="font-size:14px">AJ Fashion Galaxy</div>
+        <div style="font-size:11px;color:var(--muted)">Buy • Sell • Discover</div>
       </div>
     </div>
-  </header>
 
-  <main class="main">
-    <section style="max-width:900px;margin:36px auto;padding:0 20px">
-      <h2>Sell — Add a new product</h2>
+    <div class="search">
+      <input id="topSearch" placeholder="Search clothes, shoes, accessories..." />
+    </div>
 
-      <div id="authArea"></div>
+    <div class="actions">
+      <a href="women.html" class="btn alt">Women</a>
+      <a href="men.html" class="btn alt">Men</a>
+      <a href="kids.html" class="btn alt">Kids</a>
+      <a href="sell.html" class="btn alt">Sell</a>
+      <button class="btn alt" id="loginBtn">Login</button>
+      <button class="btn" id="openCart">Cart (<span id="cartNum">0</span>)</button>
+    </div>
+  </div>
+</header>
 
-      <div id="sellForm" class="panel" style="display:none;margin-top:12px">
-        <label>Title</label><input id="p_title" />
-        <label>Category</label>
-        <select id="p_category"><option>Women</option><option>Men</option><option>Kids</option></select>
-        <label>Price (GHS)</label><input id="p_price" type="number" step="0.01" />
-        <label>Image URL</label><input id="p_img" placeholder="https://..." />
-        <label>Description</label><textarea id="p_desc" rows="4"></textarea>
-        <div style="margin-top:10px;display:flex;gap:8px">
-          <button id="saveProduct" class="btn">Save Product</button>
-          <button id="cancelProduct" class="btn alt">Cancel</button>
+<section class="hero">
+  <div class="hero-left">
+    <h1>Welcome to AJ Fashion Galaxy - Sell</h1>
+    <p>Manage your store easily — upload products, monitor inventory, and process orders.</p>
+  </div>
+
+  <div class="hero-right panel">
+    <div style="font-weight:700">Quick Filters</div>
+    <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="chip" data-cat="Clothing">Clothing</button>
+      <button class="chip" data-cat="Shoes">Shoes</button>
+      <button class="chip" data-cat="Accessories">Accessories</button>
+      <button class="chip" data-cat="All">All</button>
+    </div>
+  </div>
+</section>
+
+<main class="main">
+  <!-- LEFT SIDEBAR MENU -->
+  <aside class="panel">
+    <h4>Seller Menu</h4>
+    <div class="menu-buttons">
+      <button onclick="loadContent('upload')">Upload New Product</button>
+      <button onclick="loadContent('sales')">Sales Inventory</button>
+      <button onclick="loadContent('stock')">Stock Inventory</button>
+      <button onclick="loadContent('orders')">Orders</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <div class="content-area" id="contentArea">
+    <h2>Dashboard Overview</h2>
+    <p>Select a section from the left menu to manage your selling operations.</p>
+  </div>
+</main>
+
+<script>
+function loadContent(section) {
+  const area = document.getElementById("contentArea");
+
+  if (section === "upload") {
+    area.innerHTML = `
+      <h2>Upload New Product</h2>
+      <form id="uploadForm">
+        <div class="form-group">
+          <label for="productId">Product ID</label>
+          <input id="productId" placeholder="e.g., W101" required />
         </div>
-      </div>
 
-      <h3 style="margin-top:24px">Your listings (local)</h3>
-      <div id="yourListings" class="grid"></div>
-    </section>
-  </main>
+        <div class="form-group">
+          <label for="productTitle">Product Title</label>
+          <input id="productTitle" placeholder="e.g., Women’s Blouse" required />
+        </div>
 
-  <div id="modals"></div>
-  <script src="scripts/index.js"></script>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" required>
+            <option value="Clothing">Clothing</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Accessories">Accessories</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price (GHS)</label>
+          <input type="number" id="price" min="0" required />
+        </div>
+
+        <div class="form-group">
+          <label for="image">Product Image URL</label>
+          <input type="text" id="image" placeholder="images/blouse.jpg" />
+        </div>
+
+        <div class="form-group">
+          <label for="desc">Description</label>
+          <textarea id="desc" placeholder="Brief product description..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn">Save Product</button>
+        </div>
+      </form>
+    `;
+  } 
+  
+  else if (section === "sales") {
+    area.innerHTML = `
+      <h2>Sales Inventory</h2>
+      <p>Track all your product sales and revenue here.</p>
+    `;
+  }
+
+  else if (section === "stock") {
+    area.innerHTML = `
+      <h2>Stock Inventory</h2>
+      <p>Monitor available stock and restocking needs.</p>
+    `;
+  }
+
+  else if (section === "orders") {
+    area.innerHTML = `
+      <h2>Orders</h2>
+      <p>Manage and track customer orders efficiently.</p>
+    `;
+  }
+}
+</script>
+
 </body>
 </html>
