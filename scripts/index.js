@@ -46,7 +46,7 @@ if (products.length === 0) {
       title: 'Women’s Blouse',
       category: 'Clothing',
       price: 85,
-      img: 'images/w-blouse.jpg',
+      img: 'images/w-blouse.jpeg',
       desc: 'Lightweight cotton blouse, perfect for everyday style.' 
     },
     {
@@ -62,7 +62,7 @@ if (products.length === 0) {
       title: 'Women’s Shoe',
       category: 'Shoes',
       price: 150,
-      img: 'images/w-office-shoe.jpg',
+      img: 'images/w-office-shoe.jpeg',
       desc: 'Elegant women’s office shoe designed for comfort and style, suitable for both work and outings.' 
     },
     {
@@ -70,7 +70,7 @@ if (products.length === 0) {
       title: 'Women’s Shoe',
       category: 'Shoes',
       price: 150,
-      img: 'images/w-office-shoe-1.jpg',
+      img: 'images/w-office-shoe-1.jpeg',
       desc: 'Elegant women’s office shoe designed for comfort and style, suitable for both work and outings.' 
     },
     {
@@ -78,7 +78,7 @@ if (products.length === 0) {
       title: 'Women’s Shoe',
       category: 'Shoes',
       price: 150,
-      img: 'images/w-office-shoe-2.jpg',
+      img: 'images/w-office-shoe-2.jpeg',
       desc: 'Elegant women’s office shoe designed for comfort and style, suitable for both work and outings.' 
     },
     {
@@ -86,7 +86,7 @@ if (products.length === 0) {
       title: 'Women’s Sneakers',
       category: 'Shoes',
       price: 200,
-      img: 'images/w-sneaker.jpg',
+      img: 'images/w-sneaker.jpeg',
       desc: 'Comfortable everyday sneakers with a sleek design, perfect for casual wear and long walks.'
     },
     {
@@ -94,7 +94,7 @@ if (products.length === 0) {
       title: 'Women’s Sneakers',
       category: 'Shoes',
       price: 200,
-      img: 'images/w-sneaker-1.jpg',
+      img: 'images/w-sneaker-1.jpeg',
       desc: 'Comfortable everyday sneakers with a sleek design, perfect for casual wear and long walks.'
     },
     {
@@ -110,7 +110,7 @@ if (products.length === 0) {
       title: 'Women’s Bags',
       category: 'Accessories',
       price: 400,
-      img: 'images/w-bag.jpg',
+      img: 'images/w-bag.jpeg',
       desc: 'Stylish and durable women’s handbag, perfect for everyday use and special outings.' 
     },
     {
@@ -118,7 +118,7 @@ if (products.length === 0) {
       title: 'Women’s Bags',
       category: 'Accessories',
       price: 400,
-      img: 'images/w-bag-1.jpg',
+      img: 'images/w-bag-1.jpeg',
       desc: 'Stylish and durable women’s handbag, perfect for everyday use and special outings.' 
     },
     {
