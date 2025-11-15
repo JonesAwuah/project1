@@ -46,8 +46,88 @@ if (products.length === 0) {
       title: 'Women’s Blouse',
       category: 'Clothing',
       price: 85,
-      img: 'images/W-blouse-1.jpg',
+      img: 'images/w-blouse.jpg',
       desc: 'Lightweight cotton blouse, perfect for everyday style.' 
+    },
+    {
+      id: 'W103', // W → Women
+      title: 'Women’s Blouse',
+      category: 'Clothing',
+      price: 85,
+      img: 'images/w-blouse-1.jpg',
+      desc: 'Lightweight cotton blouse, perfect for everyday style.' 
+    },
+    {
+      id: 'W104', // W → Women
+      title: 'Women’s Shoe',
+      category: 'Shoes',
+      price: 150,
+      img: 'images/w-office-shoe.jpg',
+      desc: 'Elegant women’s office shoe designed for comfort and style, suitable for both work and outings.' 
+    },
+    {
+      id: 'W105', // W → Women
+      title: 'Women’s Shoe',
+      category: 'Shoes',
+      price: 150,
+      img: 'images/w-office-shoe-1.jpg',
+      desc: 'Elegant women’s office shoe designed for comfort and style, suitable for both work and outings.' 
+    },
+    {
+      id: 'W106', // W → Women
+      title: 'Women’s Shoe',
+      category: 'Shoes',
+      price: 150,
+      img: 'images/w-office-shoe-2.jpg',
+      desc: 'Elegant women’s office shoe designed for comfort and style, suitable for both work and outings.' 
+    },
+    {
+      id: 'W107', // W → Women
+      title: 'Women’s Sneakers',
+      category: 'Shoes',
+      price: 200,
+      img: 'images/w-sneaker.jpg',
+      desc: 'Comfortable everyday sneakers with a sleek design, perfect for casual wear and long walks.'
+    },
+    {
+      id: 'W108', // W → Women
+      title: 'Women’s Sneakers',
+      category: 'Shoes',
+      price: 200,
+      img: 'images/w-sneaker-1.jpg',
+      desc: 'Comfortable everyday sneakers with a sleek design, perfect for casual wear and long walks.'
+    },
+    {
+      id: 'W109', // W → Women
+      title: 'Women’s Sneakers',
+      category: 'Shoes',
+      price: 200,
+      img: 'images/w-sneaker-2.jpg',
+      desc: 'Comfortable everyday sneakers with a sleek design, perfect for casual wear and long walks.'
+    },
+    {
+      id: 'W110', // W → Women
+      title: 'Women’s Bags',
+      category: 'Accessories',
+      price: 400,
+      img: 'images/w-bag.jpg',
+      desc: 'Stylish and durable women’s handbag, perfect for everyday use and special outings.' 
+    },
+    {
+      id: 'W111', // W → Women
+      title: 'Women’s Bags',
+      category: 'Accessories',
+      price: 400,
+      img: 'images/w-bag-1.jpg',
+      desc: 'Stylish and durable women’s handbag, perfect for everyday use and special outings.' 
+    },
+    {
+      id: 'W112', // W → Women
+      title: 'Women’s Bags',
+      category: 'Accessories',
+      price: 400,
+      img: 'images/w-bag-2.jpg',
+      desc: 'Stylish and durable women’s handbag, perfect for everyday use and special outings.'
     },
     {
       id: 'M101', // M → Men
