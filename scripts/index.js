@@ -42,6 +42,14 @@ if (products.length === 0) {
       desc: 'Lightweight cotton blouse, perfect for everyday style.' 
     },
     {
+      id: 'W102', // W → Women
+      title: 'Women’s Blouse',
+      category: 'Clothing',
+      price: 85,
+      img: 'images/W-blouse-1.jpg',
+      desc: 'Lightweight cotton blouse, perfect for everyday style.' 
+    },
+    {
       id: 'M101', // M → Men
       title: 'Men’s Sneakers',
       category: 'Shoes',
