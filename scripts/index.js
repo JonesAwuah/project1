@@ -131,19 +131,147 @@ if (products.length === 0) {
     },
     {
       id: 'M101', // M → Men
+      title: 'Men’s Shirt',
+      category: 'Clothing',
+      price: 90,
+      img: 'images/m-shirt.jpg',
+      desc: 'Classic men’s shirt crafted from quality fabric, offering a clean and stylish look for any occasion.' 
+    },
+    {
+      id: 'M102', // M → Men
+      title: 'Men’s Shirt',
+      category: 'Clothing',
+      price: 90,
+      img: 'images/m-shirt-1.jpg',
+      desc: 'Classic men’s shirt crafted from quality fabric, offering a clean and stylish look for any occasion.' 
+    },
+    {
+      id: 'M103', // M → Men
+      title: 'Men’s Shirt',
+      category: 'Clothing',
+      price: 90,
+      img: 'images/m-shirt-2.jpg',
+      desc: 'Classic men’s shirt crafted from quality fabric, offering a clean and stylish look for any occasion.' 
+    },
+    {
+      id: 'M104', // M → Men
+      title: 'Men’s Shoe',
+      category: 'Shoes',
+      price: 350,
+      img: 'images/m-shoe.jpeg',
+      desc: 'Premium men’s office shoes crafted for all-day comfort and a clean, professional look suitable for any formal setting.' 
+    },
+    {
+      id: 'M105', // M → Men
+      title: 'Men’s Shoe',
+      category: 'Shoes',
+      price: 350,
+      img: 'images/m-shoe-1.jpg',
+      desc: 'Premium men’s office shoes crafted for all-day comfort and a clean, professional look suitable for any formal setting.'
+    },
+    {
+      id: 'M106', // M → Men
+      title: 'Men’s Shoe',
+      category: 'Shoes',
+      price: 350,
+      img: 'images/m-shoe-2.jpg',
+      desc: 'Premium men’s office shoes crafted for all-day comfort and a clean, professional look suitable for any formal setting.'
+    },
+    {
+      id: 'M107', // M → Men
+      title: 'Men’s Sneakers',
+      category: 'Shoes',
+      price: 450,
+      img: 'images/m-sneakers.jpg',
+      desc: 'Premium men’s sneakers built for comfort and everyday style, making them perfect for casual outings and active wear.'  
+    },
+    {
+      id: 'M108', // M → Men
+      title: 'Men’s Sneakers',
+      category: 'Shoes',
+      price: 450,
+      img: 'images/m-sneakers-1.jpg',
+      desc: 'Premium men’s sneakers built for comfort and everyday style, making them perfect for casual outings and active wear.'  
+    },
+    {
+      id: 'M109', // M → Men
       title: 'Men’s Sneakers',
       category: 'Shoes',
       price: 240,
-      img: 'images/sneakers.jpg',
-      desc: 'Easy-going, stylish sneakers perfect for daily wear with ultimate comfort.' 
+      img: 'images/m-sneakers-2.jpg',
+      desc: 'Premium men’s sneakers built for comfort and everyday style, making them perfect for casual outings and active wear.'  
     },
     {
-      id: 'K101', // K → Kids
-      title: 'Kids Hoodie',
+      id: 'M110', // M → Men
+      title: 'Men’s Watch',
+      category: 'Accessories',
+      price: 240,
+      img: 'images/m-watches.jpg',
+      desc: 'Elegant and durable men’s watch, perfect for everyday wear or special occasions.' 
+    },
+    {
+      id: 'M111', // M → Men
+      title: 'Men’s Watch',
+      category: 'Accessories',
+      price: 180,
+      img: 'images/m-watches-1.jpg',
+      desc: 'Elegant and durable men’s watch, perfect for everyday wear or special occasions.' 
+    },
+    {
+      id: 'M112', // M → Men
+      title: 'Men’s Watch',
+      category: 'Accessories',
+      price: 180,
+      img: 'images/m-watches-2.jpg',
+      desc: 'Elegant and durable men’s watch, perfect for everyday wear or special occasions.' 
+    },
+    {
+      id: 'KB101', // KB → Boy Kids
+      title: 'Boy’s Complete Wear',
       category: 'Clothing',
       price: 130,
-      img: 'images/hoodie.jpg',
-      desc: 'Kids’ hoodie, soft, warm and cozy, great for all seasons.'
+      img: 'images/k-boy-clothing.jpg',
+      desc: 'Stylish and comfortable complete outfit for boys, perfect for school, play, or casual outings.'
+    },
+    {
+      id: 'KB102', // KB → Boy Kids
+      title: 'Boy’s Complete Wear',
+      category: 'Clothing',
+      price: 130,
+      img: 'images/k-boy-clothing-1.jpg',
+      desc: 'Stylish and comfortable complete outfit for boys, perfect for school, play, or casual outings.'
+    },
+    {
+      id: 'KB103', // KB → Boy Kids
+      title: 'Boy’s Complete Wear',
+      category: 'Clothing',
+      price: 130,
+      img: 'images/k-boy-clothing-2.jpg',
+      desc: 'Stylish and comfortable complete outfit for boys, perfect for school, play, or casual outings.'
+    },
+    {
+      id: 'KG101', // KG → Girl Kids
+      title: 'Girl’s Straight Dress',
+      category: 'Clothing',
+      price: 130,
+      img: 'images/k-dress.jpg',
+      desc: 'Chic and comfortable straight dress for girls, perfect for casual wear or special occasions.'
+    },
+    {
+      id: 'KG102', // KG → Girl Kids
+      title: 'Girl’s Straight Dress',
+      category: 'Clothing',
+      price: 130,
+      img: 'images/k-dress-1.jpg',
+      desc: 'Chic and comfortable straight dress for girls, perfect for casual wear or special occasions.'
+    },
+    {
+      id: 'KG103', // KG → Girl Kids
+      title: 'Girl’s Straight Dress',
+      category: 'Clothing',
+      price: 130,
+      img: 'images/k-dress-2.jpg',
+      desc: 'Chic and comfortable straight dress for girls, perfect for casual wear or special occasions.'
     }
   ];
   saveProducts();
